@@ -1,41 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Security;
-using System.Text;
-using System.Threading.Tasks;
-using Logging;
-
-namespace DBConnection
+﻿namespace DBConnection
 {
     public class Program
-    { 
-        
+    {
         public static void Main(string[] args)
         {
-            Log Log = new Log();
-            Log.InitializeLog();
+            Logger oLogger = new Logger();
+            oLogger.InitializeLog();
+
             try
             {
-              Log.Info("Log Initialisiert!");
-              Log.Info("Versuche nun mit der Datenbank zu Verbinden..");
-              Connection oConnection = new Connection();
-              oConnection.DBConnect();
-              if (oConnection.DBConnect() == true)
-              {
-                Log.Info("Verbindung zur Datenbank erfolgreich!");
-              }
-              else 
-              {
-                Log.Warning("Verbindung zur Datenbank konnte nicht hergestellt werden!");
-              }
+                oLogger.Info("Log Initialisiert!");
+                oLogger.Info("Versuche nun mit der Datenbank zu Verbinden..");
+                Connection oConnection = new Connection();
+
+                if (Connection.DBConnect())
+                {
+                    oLogger.Info("Verbindung zur Datenbank erfolgreich!");
+                }
+                else
+                {
+                    oLogger.Warning("Verbindung zur Datenbank konnte nicht hergestellt werden!");
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-              Log.Error(ex.ToString());
+                oLogger.Error(ex.ToString());
             }
-          Log.Warning("Program ende! Schließe Log..");
-          Log.CloseLog();
+
+            oLogger.Warning("Programm ende! Schließe Log..");
+            oLogger.CloseLog();
         }
     }
 }
