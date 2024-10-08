@@ -1,0 +1,11 @@
+.vscode
+**.DS_Store
+bin/
+obj/
+db/
+database
+.env.local
+.idea/
+tsconfig.tsbuildinfo
+.vs/
+dist
